@@ -360,13 +360,13 @@ bool PointInPolygonWithGrid<CoordinateType>::isConvex(const PointInPolygonWithGr
     for (auto i : ext::range(1, outer.size() - 1))
     {
         Point cur = getVector(outer[i], outer[i + 1]);
-        if (vecProduct(prev, cur) > 0)
+        if (vecProduct(prev, cur) < 0)
             return false;
 
         prev = cur;
     }
 
-    return vecProduct(first, prev) > 0;
+    return vecProduct(prev, first) >= 0;
 }
 
 template <typename CoordinateType>
